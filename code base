@@ -2,20 +2,44 @@ import time
 import random
 
 def typing_speed_test():
-    # List of sentences for the typing test
-    sentences = [
-        "Welcome to IT Project Expo",
-        "Python is a popular programming language.",
-        "Practice makes perfect when it comes to typing.",
-        "Typing tests can improve your speed and accuracy.",
-        "Artificial intelligence is transforming the world."
-    ]
+    # Sentences for each level
+    levels = {
+        "beginner": [
+            "The sun rises in the east.",
+            "Python is easy to learn.",
+            "Practice makes perfect.",
+            "Keep calm and type on.",
+            "Typing is a fun skill."
+        ],
+        "intermediate": [
+            "Computers are an integral part of our daily lives.",
+            "Typing tests are a great way to improve accuracy and speed.",
+            "Learning new skills can be challenging but rewarding.",
+            "Programming languages like Python are versatile and powerful.",
+            "Technology continues to shape the modern world."
+        ],
+        "advanced": [
+            "Artificial intelligence is revolutionizing industries across the globe.",
+            "A journey of a thousand miles begins with a single step, as they say.",
+            "Understanding complex algorithms requires patience and practice.",
+            "Theoretical physics and quantum mechanics are fascinating fields of study.",
+            "Effective communication is the cornerstone of success in any endeavor."
+        ]
+    }
 
-    # Randomly select a sentence
-    sentence = random.choice(sentences)
+    # Ask players to choose a level
+    print("Welcome to the Typing Speed Test: Multiplayer Edition!")
+    print("Choose a difficulty level: beginner, intermediate, or advanced.")
+    level = input("Enter your choice: ").strip().lower()
 
-    print("\nWelcome to the Typing Speed Test: Multiplayer Edition!")
-    print("Both players will type the same sentence.")
+    # Validate level choice
+    if level not in levels:
+        print("Invalid choice. Defaulting to beginner level.")
+        level = "beginner"
+
+    # Randomly select a sentence based on chosen level
+    sentence = random.choice(levels[level])
+    print(f"\nBoth players will type the following sentence ({level.capitalize()} Level):")
     print(f"\n\033[1m{sentence}\033[0m")  # Bold formatting
 
     # Results storage
@@ -69,5 +93,5 @@ def typing_speed_test():
     else:
         print("It's a tie in accuracy!")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     typing_speed_test()

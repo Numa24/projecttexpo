@@ -4,7 +4,7 @@ import random
 def typing_speed_test():
     # List of sentences for the typing test
     sentences = [
-        "The quick brown fox jumps over the lazy dog.",
+        "Welcome to IT Project Expo",
         "Python is a popular programming language.",
         "Practice makes perfect when it comes to typing.",
         "Typing tests can improve your speed and accuracy.",
@@ -14,29 +14,60 @@ def typing_speed_test():
     # Randomly select a sentence
     sentence = random.choice(sentences)
 
-    print("\nWelcome to the Typing Speed Test!")
-    print("Type the following sentence as quickly and accurately as possible:")
+    print("\nWelcome to the Typing Speed Test: Multiplayer Edition!")
+    print("Both players will type the same sentence.")
     print(f"\n\033[1m{sentence}\033[0m")  # Bold formatting
 
-    # Start the timer
-    input("\nPress Enter when you are ready...")
-    start_time = time.time()
+    # Results storage
+    results = {}
 
-    # Take the user's input
-    typed_text = input("\nStart typing: ")
+    # Typing test for each player
+    for player in [1, 2]:
+        print(f"\nPlayer {player}, get ready!")
+        input("Press Enter when you are ready...")
+        start_time = time.time()
 
-    # End the timer
-    end_time = time.time()
+        # Take the player's input
+        typed_text = input("\nStart typing: ")
 
-    # Calculate typing speed and accuracy
-    elapsed_time = end_time - start_time
-    words_per_minute = len(typed_text.split()) / (elapsed_time / 60)
-    accuracy = sum(1 for a, b in zip(typed_text, sentence) if a == b) / len(sentence) * 100
+        # End the timer
+        end_time = time.time()
 
-    print("\n--- Results ---")
-    print(f"Time Taken: {elapsed_time:.2f} seconds")
-    print(f"Words Per Minute (WPM): {words_per_minute:.2f}")
-    print(f"Accuracy: {accuracy:.2f}%")
+        # Calculate typing speed and accuracy
+        elapsed_time = end_time - start_time
+        words_per_minute = len(typed_text.split()) / (elapsed_time / 60)
+        accuracy = sum(1 for a, b in zip(typed_text, sentence) if a == b) / len(sentence) * 100
+
+        # Store results
+        results[player] = {
+            "time": elapsed_time,
+            "wpm": words_per_minute,
+            "accuracy": accuracy,
+        }
+
+        print(f"\nPlayer {player}'s Results:")
+        print(f"Time Taken: {elapsed_time:.2f} seconds")
+        print(f"Words Per Minute (WPM): {words_per_minute:.2f}")
+        print(f"Accuracy: {accuracy:.2f}%")
+
+    # Compare results and declare the winner
+    print("\n--- Final Results ---")
+    for player, result in results.items():
+        print(f"Player {player}: Time = {result['time']:.2f}s, WPM = {result['wpm']:.2f}, Accuracy = {result['accuracy']:.2f}%")
+
+    if results[1]["wpm"] > results[2]["wpm"]:
+        print("\nPlayer 1 wins by typing faster!")
+    elif results[1]["wpm"] < results[2]["wpm"]:
+        print("\nPlayer 2 wins by typing faster!")
+    else:
+        print("\nIt's a tie in typing speed!")
+
+    if results[1]["accuracy"] > results[2]["accuracy"]:
+        print("Player 1 wins with higher accuracy!")
+    elif results[1]["accuracy"] < results[2]["accuracy"]:
+        print("Player 2 wins with higher accuracy!")
+    else:
+        print("It's a tie in accuracy!")
 
 if _name_ == "_main_":
     typing_speed_test()
